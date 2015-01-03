@@ -5,7 +5,7 @@ Plugin URI: https://github.com/wpmark/wpbasis
 Description: WP Basis provides the basis of a WordPress site by giving you access to the types of functions you end up writing for all sites. It also gives modifications to the WordPress dashboard which make it easier to work with for your clients.
 Author: Mark Wilkinson
 Author URI: http://markwilkinson.me
-Version: 1.3
+Version: 1.3.1
 */
 
 /* define variable for path to this plugin file. */
@@ -22,9 +22,9 @@ require_once dirname( __FILE__ ) . '/functions/counters.php';
 require_once dirname( __FILE__ ) . '/functions/admin-bar.php';
 require_once dirname( __FILE__ ) . '/functions/admin-display.php';
 
-/* load metaboxes if not already loaded */
+/* load metaboxes if not already loaded - legacy code */
 if( ! class_exists( 'CMB_Meta_Box' ) )
-	require_once dirname( __FILE__ ) . '/metaboxes/custom-meta-boxes.php';
+	require_once dirname( __FILE__ ) . '/old/metaboxes/custom-meta-boxes.php';
 
 /**
  * deal with legacy code here
