@@ -19,6 +19,18 @@ function wpbasis_add_dashboard_home() {
 			1
 		);
 
+	} else {
+		
+		/* add the dashboard page with no menu items for wpbasis super users  */
+		add_submenu_page(
+			NULL,
+			'Dashboard',
+			'Dashboard',
+			'edit_posts',
+			'wpbasis_dashboard',
+			'wpbasis_dashboard'
+		);
+		
 	}
 
 }
@@ -94,17 +106,15 @@ function wpbasis_remove_admin_sub_menus() {
 	/* if the current user is not a wpbasis super user */
 	if( ! wpbasis_is_wpbasis_user() ) {
 
-		$wpbasis_remove_sub_menu_items = apply_filters( 'wpbasis_remove_admin_sub_menus',
+		$wpbasis_remove_sub_menu_items = apply_filters(
+			'wpbasis_remove_admin_sub_menus',
 			array(
-				array(
+				'themes' => array(
 					'parent' => 'themes.php',
 					'child' => 'themes.php'
 				),
-				array(
-					'parent' => 'themes.php',
-					'child' => 'customize.php'
-				),
-				array(
+				/* remove theme editor - shouldn't be needed when theme mods are turned off in config */
+				'theme_editor' => array(
 					'parent' => 'themes.php',
 					'child' => 'theme-editor.php'
 				),
@@ -118,6 +128,13 @@ function wpbasis_remove_admin_sub_menus() {
 			remove_submenu_page( $wpbasis_remove_sub_menu_item[ 'parent'], $wpbasis_remove_sub_menu_item[ 'child' ] );	
 
 		} // end foreach item
+		
+		/**
+		 * hacky but removes the customize menu which we never want
+		 * using the conventional remove_subpage_menu seems not to work
+		 */
+		global $submenu;
+        unset( $submenu[ 'themes.php' ][ 6 ]);
 
 	} // end if wpbasis super user
 
