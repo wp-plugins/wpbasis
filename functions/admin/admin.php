@@ -394,7 +394,6 @@ function wpbasis_remove_widgets() {
 			'WP_Widget_Recent_Posts',
 			'WP_Widget_Recent_Comments',
 			'WP_Widget_Tag_Cloud',
-			'GFWidget',
 		)
 	);
 	
