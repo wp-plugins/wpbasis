@@ -377,6 +377,11 @@ add_action( 'save_post', 'wpbasis_contact_page_checkbox_save' );
  */
 function wpbasis_remove_widgets() {
 	
+	/* only hide if not a wpbasis user */
+	if( wpbasis_is_wpbasis_user() ) {
+		return;
+	}
+	
 	/* build an array of widget to remove - filterable */
 	$widgets_to_remove = apply_filters(
 		'wpbasis_removed_widgets',
